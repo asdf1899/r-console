@@ -1,0 +1,487 @@
+/**
+***
+***
+*** phersenUX - hyper flexible UI framework for humans.
+*** (C) ANAS ARAID 2019 github.com/asdf1899
+***
+***
+**/
+
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700&display=swap');
+
+
+/* Table of contents
+––––––––––––––––––––––––––––––––––––––––––––––––––
+- Reset
+- Font style
+- Typography
+- Position
+- Grid
+- Buttons
+- Colors
+- Cards
+- Form
+*/
+
+
+/**
+*** RESET
+**/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+/**
+*** ROOT FONT STYLES 
+**/
+
+* {
+  font-family: 'Quicksand', sans-serif!important;
+  font-weight: 400;
+}
+
+/**
+*** TYPOGRAPHY
+**/
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.375rem;
+}
+
+h4 {
+  font-size: 1.125rem;
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: 0.875rem;
+}
+
+p {
+  font-size: 1.125rem;
+  font-weight: 200;
+  line-height: 1.8;
+}
+
+.phersen-font-light {
+  font-weight: 300;
+}
+
+.phersen-font-regular {
+  font-weight: 400;
+}
+
+.phersen-font-heavy {
+  font-weight: 700;
+}
+::selection {
+  background: #9b59b6;
+}
+::-moz-selection {
+  background: #9b59b6;
+}
+/**
+*** POSITION 
+**/
+
+.phersen-left {
+  text-align: left;
+}
+
+.phersen-right {
+  text-align: right;
+}
+
+.phersen-center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.phersen-justify {
+  text-align: justify;
+}
+
+
+/**
+*** 12 COLUMN GRID
+*** Inspired by SkeletonCSS
+**/
+
+.phersen-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box; 
+}
+.phersen-col {
+  width: 100%;
+  float: left;
+  box-sizing: border-box; 
+  padding-left: 8px;
+  padding-top: 4px;
+  margin: 0 10px;
+}
+.phersen-row{
+  margin:10px;
+}
+/* For devices larger than 400px */
+@media (min-width: 400px) {
+  .phersen-container {
+    width: 85%;
+    padding: 0; }
+}
+
+/* For devices larger than 550px */
+@media (min-width: 550px) {
+  .phersen-container {
+    width: 80%; 
+  }
+  .phersen-col-1.eight.phersen-col,
+  .phersen-col-1.phersen-col                  { width: 4.66666666667%; }
+  .phersen-col-2.phersen-col                  { width: 13.3333333333%; }
+  .phersen-col-3.phersen-col                  { width: 22%;            }
+  .phersen-col-4.phersen-col                  { width: 30.6666666667%; }
+  .phersen-col-5.phersen-col                  { width: 39.3333333333%; }
+  .phersen-col-6.phersen-col                  { width: 48%;            }
+  .phersen-col-7.phersen-col                  { width: 56.6666666667%; }
+  .phersen-col-8.phersen-col                  { width: 65.3333333333%; }
+  .phersen-col-9.phersen-col                  { width: 74.0%;          }
+  .phersen-col-10.phersen-col                 { width: 82.6666666667%; }
+  .phersen-col-11.phersen-col                 { width: 91.3333333333%; }
+  .phersen-col-12.phersen-col                 { width: 100%; margin-left: 0; }
+}
+
+@media only screen and (max-width:992px) {
+  .phersen-hide-tablet {
+      display: none
+  }
+}
+
+@media only screen and (max-width:600px) {
+  .phersen-hide-mobile {
+      display: none
+  }
+}
+
+.phersen-hide {
+  display: none
+}
+
+/**
+*** BUTTONS
+**/
+
+.phersen-btn, .phersen-btn-square{
+  padding: 15px;
+  height: 40px;
+  width: 200px;
+  margin: 10px;
+  outline: none!important;
+  cursor: pointer;
+  transition: 0.8s;
+  position: relative;
+  border:none;
+}
+.phersen-btn{
+  border-radius: 20px;
+}
+.phersen-btn:hover, .phersen-btn-square:hover{
+  box-shadow: 0 5px 12px -4px rgb(78, 78, 78);
+  transition: 0.5s;
+}
+.phersen-btn-gradient-red{
+  background: #FF512F;
+  background: -webkit-linear-gradient( to left, #FF512F, #DD2476);
+  background: -moz-linear-gradient( to left, #FF512F, #DD2476);
+  background: -ms-linear-gradient( to left, #FF512F, #DD2476);
+  background: -o-linear-gradient( to left, #FF512F, #DD2476);
+  background: linear-gradient( to left , #FF512F, #DD2476);
+  color: white;
+}
+.phersen-btn-gradient-red:hover{
+  box-shadow: 0 7px 19px -6px #DD2476;
+  transition: 0.5s;
+}
+
+.phersen-btn-gradient-white_red{
+  background: white;
+  color: #DD2476;
+  border: 1px solid #DD2476;
+  transition: 0.5s;
+}
+.phersen-btn-white_red{
+  color:#FF512F;
+  background-color: white;
+  border: 1px solid #FF512F;
+}
+.phersen-btn-white_green{
+  color:#2ecc71;
+  background-color: white;
+  border: 1px solid #2ecc71;
+}
+.phersen-btn-white_black{
+  color:#000000;
+  background-color: white;
+  border: 1px solid #000000;
+}
+.phersen-btn-white_black:hover{
+  color:white;
+  background-color: #000000;
+  border: none;
+  box-shadow: 0 7px 19px -6px #000000;
+}
+.phersen-btn-white_yellow{
+  color:black;
+  background-color: white;
+}
+.phersen-btn-white_yellow:hover{
+  color:black;
+  background-color: yellow;
+  border: none;
+}
+.phersen-btn-yellow-2{
+  color:black;
+  background-color: yellow;
+  border: none;
+  box-shadow: 0 7px 19px -6px yellow;
+}
+.phersen-btn-yellow-2:hover{
+  color:black;
+  background-color: yellow;
+  border: none;
+}
+.phersen-btn-white_red:hover{
+  color:white;
+  background-color: #FF512F;
+  border: none;
+  box-shadow: 0 7px 19px -6px #FF512F;
+}
+.phersen-btn-white_green:hover{
+  color:white;
+  background-color: #2ecc71;
+  border: none;
+  box-shadow: 0 7px 19px -6px #2ecc71;
+}
+.phersen-btn-gradient-white_red:hover{
+  background: -webkit-linear-gradient( to left, #FF512F, #DD2476);
+  background: -moz-linear-gradient( to left, #FF512F, #DD2476);
+  background: -ms-linear-gradient( to left, #FF512F, #DD2476);
+  background: -o-linear-gradient( to left, #FF512F, #DD2476);
+  background: linear-gradient( to left , #FF512F, #DD2476);
+  box-shadow: 0 7px 19px -6px #DD2476;
+  transition: 0.5s;
+  color:white;
+  border:none;
+}
+.phersen-btn-gradient-blue{
+  background: #23A6D5;
+  background: -webkit-linear-gradient( to left, #23A6D5, #23D5AB);
+  background: -moz-linear-gradient( to left, #23A6D5, #23D5AB);
+  background: -ms-linear-gradient( to left, #23A6D5, #23D5AB);
+  background: -o-linear-gradient( to left, #23A6D5, #23D5AB);
+  background: linear-gradient( to left , #23A6D5, #23D5AB);
+  color: white;
+}
+.phersen-btn-gradient-blue:hover{
+  box-shadow: 0 7px 19px -6px #23A6D5;
+  transition: 0.5s;
+}
+.phersen-btn-gradient-white_blue{
+  background: white;
+  color: #23A6D5;
+  border: 1px solid #23A6D5;
+  transition: 0.5s;
+}
+.phersen-btn-gradient-white_blue:hover{
+  background: -webkit-linear-gradient( to left, #23A6D5, #23D5AB);
+  background: -moz-linear-gradient( to left, #23A6D5, #23D5AB);
+  background: -ms-linear-gradient( to left, #23A6D5, #23D5AB);
+  background: -o-linear-gradient( to left, #23A6D5, #23D5AB);
+  background: linear-gradient( to left , #23A6D5, #23D5AB);
+  box-shadow: 0 7px 19px -6px #23A6D5;
+  transition: 0.5s;
+  color:white;
+  border:none;
+}
+
+/**
+*** COLORS
+**/
+
+.phersen-color-text-red{
+  color:#FF512F;
+}
+.phersen-color-text-orange{
+  color:#e67e22;
+}
+.phersen-color-text-yellow{
+  color:#f1c40f;
+}
+.phersen-color-text-green{
+  color:#2ecc71;
+}
+.phersen-color-text-teal{
+  color:#1abc9c;
+}
+.phersen-color-text-grey{
+  color:#34495e;
+}
+.phersen-color-text-silver{
+  color:#bdc3c7;
+}
+.phersen-color-text-blue{
+  color:#3498db;
+}
+.phersen-color-text-violet{
+  color:#9b59b6;
+}
+.phersen-color-text-black{
+  columns: #000000;;
+}
+.phersen-color-bg-black{
+  background-color:#000000;
+  color:white;
+}
+.phersen-color-bg-red{
+  background-color:#FF512F;
+  color:white;
+}
+.phersen-color-bg-orange{
+  background-color:#e67e22;
+  color:white;
+}
+.phersen-color-bg-yellow{
+  background-color:#f1c40f;
+  color:white;
+}
+.phersen-color-bg-green{
+  background-color:#2ecc71;
+  color:white;
+}
+.phersen-color-bg-blue{
+  background-color:#3498db;
+  color:white;
+}
+.phersen-color-bg-violet{
+  background-color:#9b59b6;
+  color:white;
+}
+
+/**
+*** CARDS
+**/
+
+.phersen-card{
+  box-shadow: 0 5px 10px -6px #000000;
+  border: none;
+  border-radius: 17px;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 400;
+  min-height: 200px;
+  overflow: hidden;
+  z-index: 1;
+  position: relative;
+  background: #fff;
+}
+
+/**
+*** FORM
+**/
+
+input[type=email],
+input[type=file],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=url],
+select,
+textarea,
+textarea[type=text] {
+  width: 80%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+  transition: all .2s ease;
+  border: none;
+  border-bottom: 2px solid rgba(0,0,0,.12);
+  border-radius: 0px;
+  outline:none;
+  padding: 7px 0px;
+}
+
+input[type=email]:focus,
+input[type=file]:focus,
+input[type=number]:focus,
+input[type=password]:focus,
+input[type=search]:focus,
+input[type=tel]:focus,
+input[type=text]:focus,
+input[type=url]:focus,
+select:focus,
+textarea:focus,
+textarea[type=text]:focus {
+  border-color: #3498db;
+  transition: all .2s ease;
+}

@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="theme-color" content="#000000">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="title" content="R Console">
+        <meta name="description" content="Run R scripts on windows without an ide and enviroment variables directly from the console">
+        <meta name="author" content="Anas Araid">
+        <meta name="keywords" content="console, r, script">
+    
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://anasaraid.me/r-console">
+        <meta property="og:title" content="R Console">
+        <meta property="og:description" content="Run R scripts on windows without an ide and enviroment variables directly from the console">
+    
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://anasaraid.me/r-console">
+        <meta property="twitter:title" content="R Console">
+        <meta property="twitter:description" content="Run R scripts on windows without an ide and enviroment variables directly from the console">
+    
+        <title>R Console</title>
+    
+        <link type="text/css" rel="stylesheet" href="css/reset.css" />
+        <link type="text/css" rel="stylesheet" href="css/material.min.css" />
+        <link type="text/css" rel="stylesheet" href="css/phersen.css" />
+        <link type="text/css" rel="stylesheet" href="css/style.css" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <script src="js/material.min.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/type.js"></script>
+        <script src="js/pace.js"></script>
+    </head>
+    <body class="mdl-color--black">
+        <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+            <header class="mdl-layout__header mdl-layout__header--transparent">
+                <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title style-color-text-yellow style-font">R console</span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation -->
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link style-font style-color-text-yellow" href="https://anasaraid.me/r-console/r-console.zip">Download</a>
+                    <a class="mdl-navigation__link style-font style-color-text-yellow" href="https//github.com/asdf1899">Github</a>
+                </nav>
+                </div>
+            </header>
+            <div class="mdl-layout__drawer">
+                <span class="mdl-layout-title style-font">R console</span>
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link style-font mdl-color-text--black" href="https://anasaraid.me/r-console/r-console.zip">Download</a>
+                    <a class="mdl-navigation__link style-font mdl-color-text--black" href="https//github.com/asdf1899">Github</a>
+                </nav>
+            </div>
+            <main class="mdl-layout__content">
+                <div class="style-parent" >
+                    <div class="style-child">
+                        <h1 id="title" class="style-font style-color-text-yellow" style="font-size: 72px">R CONSOLE</h1>
+                        
+                        <script>
+                            var title = document.getElementById('title');
+                            var typewriter = new Typewriter(title, {
+                                loop: true
+                            });
+                            typewriter.typeString('R CONSOLE')
+                                .pauseFor(800)
+                                .deleteAll()
+                                .start();
+                            </script>
+                        <br>
+                        <h4 class="mdl-color-text--white">Run R scripts on windows without an ide and enviroment variables directly from the console.</h4><br>
+                        <br>
+                        <button class="phersen-btn-square phersen-btn-yellow-2 "
+                                onclick="location.href='https://anasaraid.me/r-console/r-console.zip'">
+                                <b class="style-font">DOWNLOAD</b>
+                        </button>
+                        <button class="phersen-btn-square phersen-btn-white_yellow style-font"
+                                onclick="window.open('https://github.com/asdf1899/r-console', '_blank')">
+                                <b class="style-font">GITHUB</b>
+                        </button>
+                    </div>
+                </div>
+                <section style="text-align:center">
+                    <h1 class="style-color-text-yellow">Sample</h1>
+                    <br>
+                    <br>
+                    <br>
+                    <img src="img/r.png" style="width: 80%;height: auto;margin:5%"></img>
+                </section>
+            </main>
+        </div>
+    </body>
+</html>

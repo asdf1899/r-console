@@ -1,0 +1,57 @@
+html, body, h1, h2, h3, h4, h5, h6, p, a{
+  font-family: 'Courier New', monospace!important;
+}
+.style-font{
+  font-family: 'Courier New', monospace!important;
+}
+@font-face {
+  font-family: 'Courier New';
+  src: url('/fonts/cour.ttf') format('woff'), /* Modern Browsers */
+       url('/fonts/cour.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
+.style-color-text-yellow{
+  color:yellow!important;
+}
+.style-color-yellow{
+  background-color  :yellow!important;
+}
+.mdl-layout__drawer-button {
+  color: yellow!important;
+  outline:none!important;
+}
+.mdl-layout__drawer-button > .material-icons {
+  margin-top:12px!important;
+}
+
+.style-child{
+  display:table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.style-parent{
+  display:table;
+  height: 100%;
+  width: 100%;
+}
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: yellow;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 5px;
+}
