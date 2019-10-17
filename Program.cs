@@ -20,10 +20,11 @@ namespace r_console
             Console.WriteLine("##################################");
             Console.WriteLine("");
             Console.WriteLine("Caricamento configurazione dalla cartella " + AppDomain.CurrentDomain.BaseDirectory);
-            bool letturaConfig = configurazione.readConfig(AppDomain.CurrentDomain.BaseDirectory);
-            if (letturaConfig)
+            Config letturaConfig = configurazione.readConfig(AppDomain.CurrentDomain.BaseDirectory + @"r-config.json");
+            if (letturaConfig != null)
             {
-
+                Console.WriteLine("Configurazione caricata con successo");
+                Console.WriteLine("Directory eseguibile R.exe: " + letturaConfig.path);
             }
             else
             {
@@ -31,22 +32,30 @@ namespace r_console
                 Console.WriteLine("--------------------------------------------------");
                 Console.WriteLine("Crea una nuova configurazione" + @"Percorso simile a questo 'C:\Program Files\R\R-3.6.1\bin'");
                 Console.WriteLine();
-                Console.Write("Inserisci il percorso dell\' eseguibile di R: ");
-                string newPath = Console.ReadLine();
-                if (Config.checkIfExist(Path.Combine(newPath, "R.exe")))
+                string newPath;
+                do
                 {
-                    Console.WriteLine("Eseguibile R trovato");
-                }
-                else
-                {
-                    Console.WriteLine(newPath + "/R.exe " + "eseguibile non trovato");
-                }
+                    Console.Write("Inserisci il percorso dell\' eseguibile di R: ");
+                    newPath = Console.ReadLine();
+                    newPath = Path.Combine(newPath, "R.exe");
+                    if (Config.checkIfExist(newPath))
+                    {
+                        Console.WriteLine("Eseguibile R trovato");
+                        configurazione.path = newPath;
+                        configurazione.createConfig(configurazione);
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Eseguibile non trovato");
+                    }
+                } while (true);
             }
         }
     }
     class Config
     {
-        private string path { get; set; }
+        public string path { get; set; }
         public Config()
         {
 
@@ -55,21 +64,29 @@ namespace r_console
         {
             return (File.Exists(path));
         }
-        public bool readConfig(string filePath)
+        public Config readConfig(string filePath)
         {
             if (checkIfExist(filePath))
             {
-                JObject newConfig = JObject.Parse(File.ReadAllText(filePath));
-                return true;
+                return JsonConvert.DeserializeObject<Config>(File.ReadAllText(filePath));
             }
             else
             {
-                return false;
+                return null;
             }
         }
-        public void createConfig(string filePath)
+        public void createConfig(Config configurazione)
         {
-            this.path = filePath;
+            string serialized = JsonConvert.SerializeObject(configurazione);
+            Console.WriteLine(serialized);
+            try
+            {
+                System.IO.File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"r-config.json", serialized);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }
