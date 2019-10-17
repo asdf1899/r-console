@@ -37,27 +37,50 @@ namespace r_console
             while (true)
             {
                 Console.WriteLine("\nMenu", Color.Aquamarine);
-                Console.WriteLine("1) Nuova configurazione", Color.Aquamarine);
-                Console.WriteLine("2) Mostra directory attuale", Color.Aquamarine);
-                Console.WriteLine("3) Esci", Color.Aquamarine);
+                Console.WriteLine("1) Esegui un file R", Color.Aquamarine);
+                Console.WriteLine("2) Nuova configurazione", Color.Aquamarine);
+                Console.WriteLine("3) Mostra directory attuale", Color.Aquamarine);
+                Console.WriteLine("4) Aiuto", Color.Aquamarine);
+                Console.WriteLine("5) Esci", Color.Aquamarine);
                 Console.WriteLine("");
                 Console.Write("$> ", Color.Yellow);
                 string read = Console.ReadLine();
                 switch (read)
                 {
                     case "1":
+                        executeFile(configurazione.path);
+                        break;
+                    case "2":
                         Console.WriteLine("--------------------------------------------------");
                         configurazione = newConfig(configurazione);
                         loadConfig(configurazione);
                         break;
-                    case "2":
+                    case "3":
                         Console.Write("Directory attuale ");
                         Console.Write("" + configurazione.path.ToString() + "\n", Color.Yellow);
                         break;
-                    case "3":
+                    case "4":
+                        Console.WriteLine("Non ne ho voglia di scrivere :)");
+                        break;
+                    case "5":
                         Environment.Exit(0);
                         break;
                 }
+            }
+        }
+        public static void executeFile(string rstudioPath)
+        {
+            Console.Write("Inserisci il nome del file (senza estensione .r): ");
+            string filename = Console.ReadLine();
+            filename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename+".r");
+            Console.WriteLine(filename);
+            if (File.Exists(filename))
+            {
+
+            }
+            else
+            {
+                Console.WriteLine(filename + " non trovato", Color.Red);
             }
         }
         public static Config loadConfig(Config configurazione)
@@ -67,7 +90,7 @@ namespace r_console
             if (letturaConfig != null)
             {
                 Console.WriteLine("Configurazione caricata con successo", Color.LimeGreen);
-                Console.Write("Directory eseguibile R.exe: ");
+                Console.Write("Directory eseguibile Rscript.exe: ");
                 Console.WriteLine(letturaConfig.path, Color.Yellow);
                 return letturaConfig;
             }
@@ -88,7 +111,7 @@ namespace r_console
             {
                 Console.Write("Inserisci il percorso dell\' eseguibile di R: ");
                 newPath = Console.ReadLine();
-                newPath = Path.Combine(newPath, "R.exe");
+                newPath = Path.Combine(newPath, "Rscript.exe");
                 if (Config.checkIfExist(newPath))
                 {
                     Console.WriteLine("Eseguibile R trovato", Color.LimeGreen);
