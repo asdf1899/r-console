@@ -18,8 +18,8 @@ namespace r_console
         {
             Config configurazione = new Config();
             Console.WriteLine("################################################", Color.Yellow);
-            Console.WriteAscii("R CONSOLE", Color.Yellow);
-            Console.WriteLine("Copyright 2019 @asdf1899", Color.Yellow);
+            Console.WriteAscii("R CONSOLE v1.0", Color.Yellow);
+            Console.WriteLine("Copyright 2019 Anas Araid", Color.Yellow);
             Console.WriteLine("");
             Console.WriteLine("################################################", Color.Yellow);
             Console.WriteLine("");
@@ -30,7 +30,8 @@ namespace r_console
             }
             else
             {
-                newConfig(configurazione);
+                config = newConfig(configurazione);
+                menu(config);
             }
         }
         public static void menu(Config configurazione)
@@ -62,6 +63,7 @@ namespace r_console
                         break;
                     case "4":
                         Console.WriteLine("Non ne ho voglia di scrivere :)");
+                        Console.WriteLine("L'importante è che il file R venga eseguito nello stesso percorso di questa console");
                         break;
                     case "5":
                         Environment.Exit(0);
@@ -74,8 +76,6 @@ namespace r_console
             Console.Write("Inserisci il nome del file (senza estensione .r): ");
             string filename = Console.ReadLine();
             filename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename+".r");
-            Console.Write("File trovato: ", Color.LimeGreen);
-            Console.Write(filename+"\n", Color.Yellow);
             if (File.Exists(filename))
             {
                 string exe = '"' + rstudioPath + '"' + " " + filename;
@@ -127,7 +127,7 @@ namespace r_console
                 Console.Write("Inserisci il percorso dell\' eseguibile di R: ");
                 newPath = Console.ReadLine();
                 newPath = Path.Combine(newPath, "Rscript.exe");
-                if (Config.checkIfExist(newPath))
+                if (File.Exists(newPath))
                 {
                     Console.WriteLine("Eseguibile R trovato", Color.LimeGreen);
                     configurazione.path = newPath;
