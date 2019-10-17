@@ -8,6 +8,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using System.Drawing;
 using Console = Colorful.Console;
+using System.Diagnostics;
 
 namespace r_console
 {
@@ -56,7 +57,7 @@ namespace r_console
                         loadConfig(configurazione);
                         break;
                     case "3":
-                        Console.Write("Directory attuale ");
+                        Console.Write("Directory rscript.exe ");
                         Console.Write("" + configurazione.path.ToString() + "\n", Color.Yellow);
                         break;
                     case "4":
@@ -73,10 +74,24 @@ namespace r_console
             Console.Write("Inserisci il nome del file (senza estensione .r): ");
             string filename = Console.ReadLine();
             filename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename+".r");
-            Console.WriteLine(filename);
+            Console.Write("File trovato: ", Color.LimeGreen);
+            Console.Write(filename+"\n", Color.Yellow);
             if (File.Exists(filename))
             {
+                string exe = '"' + rstudioPath + '"' + " " + filename;
+                Process cmd = new Process();
+                cmd.StartInfo.FileName = "cmd.exe";
+                cmd.StartInfo.RedirectStandardInput = true;
+                cmd.StartInfo.RedirectStandardOutput = true;
+                cmd.StartInfo.CreateNoWindow = true;
+                cmd.StartInfo.UseShellExecute = false;
+                cmd.Start();
 
+                cmd.StandardInput.WriteLine(exe);
+                cmd.StandardInput.Flush();
+                cmd.StandardInput.Close();
+                cmd.WaitForExit();
+                Console.WriteLine(cmd.StandardOutput.ReadToEnd());
             }
             else
             {
