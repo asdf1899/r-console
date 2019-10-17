@@ -22,44 +22,18 @@ namespace r_console
             Console.WriteLine("");
             Console.WriteLine("################################################", Color.Yellow);
             Console.WriteLine("");
-            Console.WriteLine("Caricamento configurazione dalla cartella " + AppDomain.CurrentDomain.BaseDirectory);
-            Config letturaConfig = configurazione.readConfig(AppDomain.CurrentDomain.BaseDirectory + @"r-config.json");
-            if (letturaConfig != null)
+            var config = loadConfig(configurazione);
+            if (config != null)
             {
-                Console.WriteLine("Configurazione caricata con successo", Color.LimeGreen);
-                Console.Write("Directory eseguibile R.exe: ");
-                Console.WriteLine(letturaConfig.path, Color.Yellow);
-                menu(letturaConfig);
+                menu(config);
             }
             else
             {
-                Console.WriteLine("File non caricato", Color.Red);
-                Console.WriteLine("--------------------------------------------------");
-                Console.WriteLine("Crea una nuova configurazione" + @"Percorso simile a questo 'C:\Program Files\R\R-3.6.1\bin'");
-                Console.WriteLine();
-                string newPath;
-                do
-                {
-                    Console.Write("Inserisci il percorso dell\' eseguibile di R: ");
-                    newPath = Console.ReadLine();
-                    newPath = Path.Combine(newPath, "R.exe");
-                    if (Config.checkIfExist(newPath))
-                    {
-                        Console.WriteLine("Eseguibile R trovato", Color.LimeGreen);
-                        configurazione.path = newPath;
-                        configurazione.createConfig(configurazione);
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Eseguibile non trovato", Color.Red);
-                    }
-                } while (true);
+                newConfig(configurazione);
             }
         }
         public static void menu(Config configurazione)
         {
-            Console.WriteLine(configurazione.path.ToString());
             while (true)
             {
                 Console.WriteLine("\nMenu", Color.Aquamarine);
@@ -72,17 +46,61 @@ namespace r_console
                 switch (read)
                 {
                     case "1":
-
+                        Console.WriteLine("--------------------------------------------------");
+                        configurazione = newConfig(configurazione);
+                        loadConfig(configurazione);
                         break;
                     case "2":
-                        Console.Write("Directory ");
-                        Console.Write("asd", Color.Yellow);
+                        Console.Write("Directory attuale ");
+                        Console.Write("" + configurazione.path.ToString() + "\n", Color.Yellow);
                         break;
                     case "3":
                         Environment.Exit(0);
                         break;
                 }
             }
+        }
+        public static Config loadConfig(Config configurazione)
+        {
+            Console.WriteLine("Caricamento configurazione dalla cartella " + AppDomain.CurrentDomain.BaseDirectory);
+            Config letturaConfig = configurazione.readConfig(AppDomain.CurrentDomain.BaseDirectory + @"r-config.json");
+            if (letturaConfig != null)
+            {
+                Console.WriteLine("Configurazione caricata con successo", Color.LimeGreen);
+                Console.Write("Directory eseguibile R.exe: ");
+                Console.WriteLine(letturaConfig.path, Color.Yellow);
+                return letturaConfig;
+            }
+            else
+            {
+                Console.WriteLine("File non caricato", Color.Red);
+                Console.WriteLine("--------------------------------------------------");
+                return null;
+            }
+        }
+        public static Config newConfig(Config configurazione)
+        {
+            Console.Write("Crea una nuova configurazione " + @"Percorso simile a questo ");
+            Console.Write(@"'C:\Program Files\R\R-3.6.1\bin'", Color.Yellow);
+            Console.WriteLine("\n");
+            string newPath;
+            do
+            {
+                Console.Write("Inserisci il percorso dell\' eseguibile di R: ");
+                newPath = Console.ReadLine();
+                newPath = Path.Combine(newPath, "R.exe");
+                if (Config.checkIfExist(newPath))
+                {
+                    Console.WriteLine("Eseguibile R trovato", Color.LimeGreen);
+                    configurazione.path = newPath;
+                    configurazione.createConfig(configurazione);
+                    return configurazione;
+                }
+                else
+                {
+                    Console.WriteLine("Eseguibile non trovato", Color.Red);
+                }
+            } while (true);
         }
     }
     class Config
@@ -110,7 +128,6 @@ namespace r_console
         public void createConfig(Config configurazione)
         {
             string serialized = JsonConvert.SerializeObject(configurazione);
-            Console.WriteLine(serialized);
             try
             {
                 System.IO.File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"r-config.json", serialized);
